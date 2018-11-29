@@ -1,0 +1,146 @@
+---
+title: "Week 10: Reroduction"
+author: "Min Hwangbo"
+date: "October 24, 2018"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+load("mar_ages.RData")
+mar_ages
+```
+
+```{r}
+married_years <- vector("list", nrow(mar_ages))
+names(married_years) <- paste0(mar_ages$seqid, "-", mar_ages$marriage_n)
+for (i in 1:nrow(mar_ages)){
+  if (is.na(mar_ages$marriage_age[i])){
+    married_years[[i]] <- NA # Assign NA if no marriage
+  } else if (!is.na(mar_ages$marriage_age[i]) & # Was married...
+              is.na(mar_ages$divorce_age[i])) { # but not divorced
+      if (mar_ages$marriage_age[i] <= mar_ages$censored_age[i]){
+         married_years[[i]] <- # Marriage age to censored age
+           mar_ages$marriage_age[i]:mar_ages$censored_age[i]
+      } else { # If married for only one year
+         married_years[[i]] <- mar_ages$marriage_age[i]
+      }
+  } else if (!is.na(mar_ages$marriage_age[i]) & # Married...
+             !is.na(mar_ages$divorce_age[i])) { # ... and divorced
+    married_years[[i]] <- # Marriage age to divorce age
+      mar_ages$marriage_age[i]:mar_ages$divorce_age[i]
+  } else { # Print ERROR if none of above conditions apply
+    married_years[[i]] <- "ERROR"; print(paste0("Error on ", i))
+  }}
+```
+
+```{r}
+head(married_years)
+```
+
+```{r}
+unmarried_years <- vector("list", nrow(mar_ages))
+names(unmarried_years) <- paste0(mar_ages$seqid, "-", mar_ages$marriage_n)
+for (i in 1:nrow(mar_ages)){
+  if (is.na(mar_ages$censored_age[i])) {
+    unmarried_years[[i]] <- NA # NA if always censored
+  } else if (is.na(mar_ages$marriage_age[i])) { # If never married
+    unmarried_years[[i]] <- 10:mar_ages$censored_age[i]
+  } else if (!is.na(mar_ages$marriage_age[i]) & # Married...
+              is.na(mar_ages$divorce_age[i])){ # ... without divorce
+    unmarried_years[[i]] <- 10:mar_ages$marriage_age[i]
+  } else if (!is.na(mar_ages$marriage_age[i]) & # Married...
+             !is.na(mar_ages$divorce_age[i])) { # ... and divorced
+    unmarried_years[[i]] <- c(10:mar_ages$marriage_age[i],
+            mar_ages$divorce_age[i]:mar_ages$censored_age[i])
+  } else {
+    unmarried_years[[i]] <- "ERROR"; print(paste0("Error on ", i))
+  }
+}
+```
+
+```{r}
+head(unmarried_years)
+```
+
+```{r}
+age_year_yes_list <- vector("list", length(unique(mar_ages$seqid)))
+names(age_year_yes_list) <- paste0("seqid_", unique(mar_ages$seqid))
+for (i in 1:length(age_year_yes_list)){
+  vals <- c(married_years[[(3*i)-2]],
+            married_years[[(3*i)-1]], 
+            married_years[[(3*i)]])
+  if (all(is.na(vals))) {
+    age_year_yes_list[[i]] <- NA # NA if all values are NA
+  } else { # Otherwise, assign non-NA values
+  age_year_yes_list[[i]] <- unique(vals[!is.na(vals)])
+  }
+}
+```
+
+```{r}
+head(age_year_yes_list)
+```
+
+```{r}
+age_year_no_list <- vector("list", length(unique(mar_ages$seqid)))
+names(age_year_no_list) <- paste0("seqid_", unique(mar_ages$seqid))
+for (i in 1:length(age_year_no_list)){
+  vals <- c(unmarried_years[[(3*i)-2]],
+            unmarried_years[[(3*i)-1]],
+            unmarried_years[[(3*i)]])
+  if (all(is.na(vals))) {
+    age_year_no_list[[i]] <- NA
+  } else {
+    age_year_no_list[[i]] <- unique(vals[!is.na(vals)])
+    age_year_no_list[[i]] <- 
+      age_year_no_list[[i]][age_year_no_list[[i]] %!in%
+                              age_year_yes_list[[i]]]
+  }
+}
+```
+
+```{r}
+head(age_year_no_list)
+```
+
+```{r}
+ay_list_to_ay_mat <- function(age_year_yes_list, age_year_no_list){
+  age_year_mat <- setNames(as.data.frame(matrix(as.numeric(NA), 
+              ncol=length(10:27), nrow=6)), paste0("age_", 10:27))
+  for(i in 1:6){ # Six individuals!
+    if (any(!is.na(age_year_yes_list[[i]]))){
+      age_year_mat[i, age_year_yes_list[[i]]-9 ] <- 1
+    } # Above: If any married ages, assign 1 to corresponding cells
+    if (any(!is.na(age_year_no_list[[i]]))){
+      age_year_mat[i, age_year_no_list[[i]]-9 ] <- 0
+    } # Above: If any unmarried ages, assign 1 to corresponding cells
+  }
+  return(age_year_mat)
+}
+mar_age_year_mat <- 
+  ay_list_to_ay_mat(age_year_yes_list = age_year_yes_list,
+                    age_year_no_list = age_year_no_list)
+mar_age_year_mat <- mar_age_year_mat %>% 
+  mutate(seqid=c(1,2,10,18,280,417)) %>% 
+  select(seqid, starts_with("age"), -age_27)
+```
+
+```{r}
+mar_age_year_mat %>% select(seqid, age_10:age_17)
+mar_age_year_mat %>% select(seqid, age_18:age_25)
+```
