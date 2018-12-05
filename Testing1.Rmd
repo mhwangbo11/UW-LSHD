@@ -1,0 +1,174 @@
+---
+title: "Advisory Commitee Meeting"
+subtitle: "*1st*"
+author: "Min Hwangbo"
+date: "2018/11/29 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: tomorrow-night-bright
+      highlightLines: true
+      countIncrementalSlides: false
+      titleSlideClass: ["center","center"]
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+  mono_light(
+    base_color = "#4b2e83",
+    code_font_google = google_font("Fira Mono"),
+    header_font_google = google_font("Cabin", "700", "700i"),
+    text_font_google   = google_font("Roboto", "500", "500i"),
+      title_slide_background_image = "https://education.uw.edu/sites/default/files/graphics/2018/logo-transparent.png",
+      title_slide_background_position = "center 500px",
+      title_slide_background_size = "30%"
+)#Cultivate Learning theme
+```
+
+# Welcome!
+
+--
+
+* Introduction
+
+--
+
+* Updates
+
+--
+
+  * R&I to Manuscript
+
+--
+
+  * Individual Development Plan
+
+--
+
+* Goal Settings
+
+--
+
+* Next Meeting
+
+---
+# Dr. Gail E. Joseph
+
+---
+# Dr. Sylvia S. Bagley
+
+---
+# Dr. Kathleen Artman-Meeker
+
+---
+# Dr. Soojin Oh Park
+
+---
+# Dr. Crystal C. Hall
+
+---
+# Min Hwangbo (황보 민)
+
+--
+
+* 2nd Year PhD Student: Learning Sciences & Human Development
+
+--
+
+* MEd in Education Policy; BA in Early Childhood & Family Studies; AA in Health Sciences  
+--
+
+* Project Lead & Graduate RA @ Cultivate Learning 
+
+--
+
+* Graduate Certificate in Demographic Methods
+
+--
+
+* Learning, System, Early Childhood, Coaching, Leadership, Soccer, Psychology, Evaluation, Policy, Health, Curriculum, Data, Philanthropy, Budgeting, Implementation, Intervention, Research Methods, Management, etc
+
+--
+
+* Pianist -> Data Collector -> Soccer Coach -> Instructor -> Preschool Teacher -> College Admin -> Tank Driver -> Policy Analyst -> Project Lead -> [R1 Postdoc Research Scientist] -> [R1 Research Associate Professor] -> ?
+
+--
+
+* Responsible for:
+
+    * Summary of the program of study 
+    * Summary of Research interests 
+    * Summary of examination timeline
+
+---
+# Timeline
+
+--
+
+* Y1: Methodology, Theories, Learning Sciences, Lit. Review
+
+--
+
+* Y2: Coaching, Mixed Methods, CSDE Cognates, Population Study
+
+--
+
+* Y3: Advanced Methods, Adult Learning, Culture 
+
+--
+
+* Y4: Dissertation
+
+--
+
+* Y1-4: Independent Studies (4) - Curricular Practical Training Requirement
+  * CA Coach Interviews
+  * Social Emotional Learning & Implementation Fidelity
+  * Trauma-Informed Care
+  * Longitudinal Study
+  * Survey Development and Analysis (Qualtrics)
+
+--
+
+* Gaps: Concentration?
+
+--
+
+---
+# Research Interests
+
+--
+
+* Theory <-> Research <-> Practice 
+
+--
+
+* Early Childhood System
+
+--
+
+* Implementation Science 
+
+--
+
+* Adult Learning
+
+--
+
+* Coaching
+
+--
+
+* Evaluation 
+
+--
+
+* Demographics
+
+--
