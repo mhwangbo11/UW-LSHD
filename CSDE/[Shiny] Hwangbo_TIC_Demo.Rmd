@@ -1,0 +1,167 @@
+---
+title: "Building Trauma-Informed Care System in Early Childhood Education System"
+author: "Min Hwangbo, LSHD PhD Student, [College of Education](https://education.uw.edu/)"
+date: "3/12/2019"
+output: html_notebook
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+```
+
+
+```{r, eval = F, echo = F, message = F, warning = F}
+## Before you go through the codes ##
+# Read comments, reflections, and resources
+# Think about what's your end outcome/deliverable and draw it on a piece of paper
+# Interpret your data by looking at the raw data. 
+  # Questions to think about: 
+  # Q1.How many observations/variables do I have? 
+  # Q2.What are the primary and secondary variables that I want to visualize in my presentation?
+  # Q3.How can I build on what I have already done into something more tangible with minimize effort to maxmize the outcome? 
+  # Q4. Is this equitable? 
+  # Q5. Is this considered valuable resource to the audience that I interact?
+  # Q6. What else can I modify (not reinvent) for the next presentation?
+  # Q7. Does this matter to me?
+
+# When you render this document, it will be via html_notebook. Render this document, then open it in a chrome or safari.
+# The document is still a draft. If you're interested in our team's brief and other research in regards to early childhood education system here in Cultivate Learning/College of Education, please contact me via foreverm@uw.edu
+
+## Comments ##
+# Presented on March 12 at Data viz class (CSSS569a_WI19: March 12, 2019 w/ Chris Adolph)
+# Comment 1: Map borders: Set white instead of grey as the layer is already blue-ish color.
+# Comment 2: Box argument in dashboard: Figure out if the height can be adjusted not to have any unnecessary scrolling bar
+# Comment 3: Cost per capita: project this by calculating funding distributed/# of pops in each state: then do I need to think about at risk pop as well or just present it's already calculated?
+# Comment 4: Multidimesionality of report: What other information can be included? Check-in with Nancy & Lucy after the SRCD presentation (March 21-23, MD)
+
+## Reflections ##
+# Reflection 1: Took me about 20 hours from data prep, learning basic R & Shiny codes, RMD, to final product. I am a heavy Tableau user so it was super helpful if I knew exactly how I wanted this final product would look like before I did this.
+
+## Resources ##
+# Resource 1: Strategies and Best Practices for Data Literacy Education - Knowledge Synthesis Report http://www.mikesmit.com/wp-content/papercite-data/pdf/data_literacy.pdf I use this for my dissertation.
+# Resource 2: Choropleth maps using R & Plotly https://plot.ly/r/choropleth-maps/ Very helpful to go through tutorial (reference Resource 3)
+# Resource 3: Data Camp step-by-step guide -  https://www.datacamp.com/courses/building-dashboards-with-shinydashboard
+# Resource 4: Flexdashboard - another type of dashboard via R https://rmarkdown.rstudio.com/flexdashboard/
+```
+
+
+```{r}
+## loading libraries ##
+library(shiny)          # Shiny web app package
+library(shinydashboard) # ShinyDashboard
+library(plotly)         # For interactive plotly map/BI
+library(readr)          # For loading CSV data sets
+```
+
+In 2018, the Washington State Department of Children, Youth, and Families launched a state advisory group to systemize **Trauma-Informed Care** as a form of an iterative and comprehensive
+approach that begins with trauma risk awareness and prevention. The following short research synthesis was prepared by [Cultivate Learning](http://cultivatelearning.uw.edu) Trauma-Informed Care doctoral student research team to support the state of Washington's effort to build a comprehensive support system to address Engrossed House Bill 2861 ([EHB 2861](http://lawfilesext.leg.wa.gov/biennium/2017-18/Pdf/Bills/Session%20Laws/House/2861.SL.pdf)).
+
+One of the current challenges that state wanted to address during the advisory group meetings was to explore and problem solve how other states have funded the system to implement a comprehensive approach to ensure all individuals including children, parents, and early childhood educators have access to multiple evidence-based prevention and intervention services as well as trainings.
+
+Substance Abuse and Mental Health Services Administration ([SAMHSA](https://www.samhsa.gov/grants)) makes grant funds available through the Center for Substance Abuse Prevention, the Center for Substance Abuse Treatment, and the Center for Mental Health Services across the United States. As a major grantor of trauma-relevant activities in the country, based on the data set avaliable from the SAMHSA website, we hope this interactive map presents birds-eye view of how major federal grants have been distributed across states.
+
+```{r}
+## Data assigning & object preps ##
+# Assigning SAMHSA data as a dataframe
+df <- read_csv("C:/Users/foreverm/Desktop/UW LSHD/ShinyApp/Data/SAMHSA2.csv") # contains SAMHSA state aggregated data from V1.
+## May need to re-import to data. Data imported from Mac OS then contents revised from Windows.
+
+# Changing column names
+colnames(df) <- c("state", "funding", "projectcount", "FY")
+
+# Adjusting funding total to millions
+df$funding <- df$funding/1000000
+
+# Creating map layers/tool tips
+df$hover <- with(df, paste(state, '<br>', "Grants Awarded: $", funding, '<br>', "Number of Projects:", projectcount))
+
+## Let's Plotly_Map this data: l, g, p arguments.##
+# Give state light white boundaries with `l` ojbect
+l <- list(color = "White", width = 0.5)
+
+# Specify some map options with `g` object
+g <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = toRGB('white'))
+
+# Creating a plotting map object with `p` object
+p <- plot_geo(df, locationmode = 'USA-states') %>%
+  add_trace(
+    z = ~funding, text = ~hover, locations = ~state, marker = list (line=l),
+    color = ~funding, colors = 'Blues'
+  ) %>%
+  colorbar(title = "$ in Millions ") %>%
+  layout(
+    title = '2018-19 SAMHSA Grants by State<br>(Hover for details)',
+    geo = g
+  )
+
+### For the upcomoing version, I want to figure out a way to click on each state, then details on funding type can be displayed on the right bottom corner as a box.
+
+# Assigning SAMHSA data frame to global environment
+assign("df", df, envir=globalenv())
+```
+
+
+```{r}
+## ui.R: All about header, sidebar, and body. ##
+# Not using header.
+header <- dashboardHeader(disable = T)
+
+# Not using sidebar - maybe next time...
+sidebar <- dashboardSidebar(disable = T)
+
+# Body
+body <- dashboardBody(
+### First row: Width max at 12: Think about the balance in each row
+  fluidRow(
+    box(
+      title = "How do we define trauma in early childhood?", width = 4, status = "primary", "It is based on the understanding that trauma is pervasive, in which all parties (including children, care providers, family members, and social services) engage in care with the goal of supporting and empowering the affected or at-risk child while recognizing potential for and actively seeking to prevent trauma."),
+    box(
+      title = "SAMHSA Grant Map", p, width = 8)
+  )
+
+### Second row: Width max at 12: Build it out later for additional data sets if available.
+)
+
+# UI
+ui <- dashboardPage(header, sidebar, body)
+
+## server.R ##
+server <- function(input, output) {}
+
+## Creating the final product ##
+shinyApp(ui, server)
+### Still need to figure out how to render it as a html file afterwards.
+```
+
+## Additional information on funding
+The [2014 Substance Abuse and Mental Health Services Administration (SAMHSA) report](https://www.nasmhpd.org/sites/default/files/SAMSHA%20Publication%20on%20Effectiveness%20&%20Cost-Effectiveness%20of,%20and%20Funding%20Strategies%20for,%20Crisis%20Services%206-5-14_8.pdf) recommended to states to coordinate multiple sources of funding direct services including crisis hotlines, emergency services centers, mobile crisis teams, residential crisis services, social detoxification with crisis stabilization services, walk-in services, etc. Based on the interview responses of eight state cases, the following funding sources are reported to support the services addressed:
+
+* State general funds
+
+* Medicaid funds including clinic, rehabilitation, 1115 waiver, 1915(b) waiver, 1915(c) waiver
+
+* Mental health block grant
+
+* Local grant
+
+* Private insurance
+
+* Self-pay
+
+* Emergency management agency funds i.e. FEMA funds
+
+* Grant funding
+
+## Recommendations
+We recommend implementing two or more evidence-based models together to ensure access to all individuals including children, parents, and early childhood educators. Below are some of our findings to maximize positive outcomes across all levels of care (from prevention-focused services to direct intervention services).
+
+* Not all evidence-based models are early childhood specific or trauma-informed care (TIC) specific. E.g. The Early Childhood Mental Health Consultation (ECMHC) is early childhood-specific and centered on mental health, but it is not focused on trauma-informed care per se. Also, the Attachment, Self-Regulation, and Competency (ARC) framework is trauma-focused, but its target population ranges from 2 to 21 years old.
+
+* A consultation-based model such as [ECHMC](http://csefel.vanderbilt.edu/documents/rs_ecmhc.pdf) would be particularly helpful in increasing awareness and knowledge of parents and teachers/child care providers on children's mental health and to help them learn strategies for how to deal with children's challenging behaviors (including developing individualized behavior support plans). However, this model does not include direct services for either the child or the parent, such as counseling or therapy.
+
+* Although the birds-eye perspecitve provides baseline information around how much fund has distributed across the state, there is a need to calculate per capita distribution of each service to a citizen. By doing so, this will provide in-depth contextual information around equitable distribution of the funds rather than the current approach of each funds get distributed based on different types of organizations. 
