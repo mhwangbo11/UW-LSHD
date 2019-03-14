@@ -1,0 +1,56 @@
+---
+title: "Hwangbo_HW9"
+author: "Min Hwangbo"
+date: "March 14, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Population in Germany
+The demography of Germany is monitored by the Statistisches Bundesamt (Federal Statistical Office of Germany). According to the first census since reunification, Germany's population was 82,790,700 (in 2011), making it the sixteenth-most populous country in the world and the most populous in the European Union. 
+
+As a country that has one of the world's highest levels of education, technological development, and economic productivity, in this brief, I will explore the change in demographics since 1990 to 2018.
+
+# About [Mortality.org](mortality.org) data
+The Human Mortality Database (HMD) was created to provide detailed mortality and population data to researchers, students, journalists, policy analysts, and others interested in the history of human longevity. 
+
+Among 40 available countires or areas, in this brief, 'Germany, Total population: Population size' data was imported.
+
+```{r, echo = FALSE, message = F}
+## loading libraries ##
+library (plotly)  # Package for viz using plotly interactives
+library (ggplot2) # Package for ggplot viz
+library (pyramid) # Package for pyramid visual creation.
+library (pander)  # Package for pander style table.
+```
+
+```{r, echo = F, message = F}
+## loading data ##
+df <- read.csv("~/Desktop/R/Data/GER_Pop_TextData.txt", sep="")
+# 5 vars, 3219 obs in global environment.
+```
+
+## Raw data
+```{r, echo = FALSE}
+## Aggregate the sum data per year ##
+aggdf <- aggregate(df$Total, by=list(Year = df$Year), FUN=sum)
+
+### Run aggdf: Will show Year, X = Total Pop data sets
+# Reanming columns by "Year" and "Pop"
+colnames(aggdf) <- c("Year", "Pop")
+
+## display raw data ##
+pandoc.table((aggdf), style = 'grid')
+```
+
+# Population Trend in Germany (1990 - 2018)
+```{r, echo = FALSE, message = F, warning = F}
+
+## Creating an interactive line chart ##
+p <- plot_ly(aggdf, x = ~Year, y = ~Pop, type = 'scatter', mode ='lines')
+p
+```
+Slight decline in births since the reunion may have contributed decline in population from 2000 to 2012. This may be due to lower birth rate, which may impacted the federal government to accept more immigrants to the country since 2010. 
