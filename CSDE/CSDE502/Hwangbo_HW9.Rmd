@@ -17,13 +17,12 @@ As a country that has one of the world's highest levels of education, technologi
 # About [Mortality.org](mortality.org) data
 The Human Mortality Database (HMD) was created to provide detailed mortality and population data to researchers, students, journalists, policy analysts, and others interested in the history of human longevity. 
 
-Among 40 available countires or areas, in this brief, 'Germany, Total population: Population size' data was imported.
+Among 40 available countries or areas, in this brief, 'Germany, Total population: Population size' data was imported.
 
 ```{r, echo = FALSE, message = F}
 ## loading libraries ##
 library (plotly)  # Package for viz using plotly interactives
 library (ggplot2) # Package for ggplot viz
-library (pyramid) # Package for pyramid visual creation.
 library (pander)  # Package for pander style table.
 ```
 
