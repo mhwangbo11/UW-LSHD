@@ -61,7 +61,13 @@ library(xaringanthemer)
 --
   
 * Proposal & Questions (10 mins)
+  
+--
+
   * Additional trainings/coursework/research
+  
+--
+
   * Questions from committee members
 
 --
@@ -157,9 +163,6 @@ library(xaringanthemer)
 
 * 2nd Year PhD Student: Learning Sciences & Human Development
 
---
-
-* MEd in Education Policy; BA in Early Childhood & Family Studies; AA in Health Sciences  
 --
 
 * Project Lead & Graduate RA @ Cultivate Learning 
