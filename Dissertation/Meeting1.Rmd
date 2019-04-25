@@ -1,8 +1,8 @@
 ---
 title: "Advisory Commitee Meeting"
-subtitle: "*1st*"
+subtitle: 1st meeting
 author: "Min Hwangbo"
-date: "2018/11/29 (updated: `r Sys.Date()`)"
+date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -11,6 +11,7 @@ output:
       highlightStyle: tomorrow-night-bright
       highlightLines: true
       countIncrementalSlides: false
+      font: Roboto
       titleSlideClass: ["center","center"]
 ---
 
@@ -24,7 +25,7 @@ library(xaringanthemer)
     base_color = "#4b2e83",
     code_font_google = google_font("Fira Mono"),
     header_font_google = google_font("Cabin", "700", "700i"),
-    text_font_google   = google_font("Roboto", "500", "500i"),
+    text_font_google   = google_font("Cabin", "500", "500i"),
       title_slide_background_image = "https://education.uw.edu/sites/default/files/graphics/2018/logo-transparent.png",
       title_slide_background_position = "center 500px",
       title_slide_background_size = "30%"
@@ -35,45 +36,122 @@ library(xaringanthemer)
 
 --
 
-* Introduction
+* Introductions & Biosketch (10-15 mins)
 
 --
 
-* Updates
+  * Career Goal
 
 --
 
-  * R&I to Manuscript
+  * Area of Interests
+  
+--
+
+* Research/Tool sharing (10 - 15 mins)
 
 --
 
-  * Individual Development Plan
+  * Course of Studies
 
 --
 
-* Goal Settings
+  * Findings from Coaching to Fidelity pilot studies and Trauma Informed Care meta-analysis/literature review (SRCD posters)
+
+--
+  
+* Proposal & Questions (10 mins)
+  * Additional trainings/coursework/research
+  * Questions from committee members
 
 --
 
-* Next Meeting
+* Committee to discuss next steps (10 mins)
+
+--
+
+* Notification to student (5 mins)
 
 ---
-# Dr. Gail E. Joseph
+
+# Dr. Gail E. Joseph (Chair)
+
+--
+
+* Bezos Family Distinguished Professor in Early Learning
+
+--
+
+* Founding Executive Director of Cultivate Learning & EarlyEdU Alliance
+
+--
+
+* Early learning and equity, child care quality, teacher preparation, early childhood mental health, social emotional learning, school readiness, and workforce development
+
+--
+
+* Recent Publication: *"The Relationship of Gross Motor and Physical Activity Environments in Child Care Settings with Early Learning Outcomes"*
 
 ---
 # Dr. Sylvia S. Bagley
 
----
-# Dr. Kathleen Artman-Meeker
+--
+
+* Director of College of Education Instructional Leadership Programs
+
+--
+
+* Instructor for University Beyond Bars (Educational Programming & Assessment Team)
+
+--
+
+* Instrucational leadership, teacher preparation, trauma informed care, adult learning & coaching, data literacy & improvement, and curriculum development
+
+--
+
+* Recent Publication: *"Teacher Leadership in Special Education: Exploring Skills, Roles, and Perceptions"*
 
 ---
 # Dr. Soojin Oh Park
 
----
-# Dr. Crystal C. Hall
+--
+
+* Assistant Professor in Early Childhood & Family Studies, Learning Sciences & Human Development, and Education, Equity, & Society Programs
+
+--
+
+* Affiliate Faculty of West Coast Poverty Center and Center for Studies in Demography & Ecology
+
+--
+
+* Public policy, mixed methods analysis, policy/program evaluation, dual language learners and immigrant-origin children, and parenting and family context of early childhood development.
+
+--
+
+* Recent Publication: *"Family Support of Third-Grade Reading Skills, Motivation, and Habits"*
 
 ---
-# Min Hwangbo (황보 민)
+# Dr. Crystal C. Hall (GSR)
+
+--
+
+* Associate Professor of Public Affairs in Daniel J. Evans School of Public Policy and Governance
+
+--
+
+* Affiliate Faculty of West Coast Poverty Center, Center for Studies in Demography & Ecology, and ideas42
+
+--
+
+* Social and cognitive psychology, poverty, behavioral economics, decision theory, low-income families, policy design and implementation, and organizational analysis of social policy.
+
+--
+
+* Recent Publication: *"Low- and Moderate-Income Tax Filers Underestimate Tax Refunds: Implications for Financial Counseling and Policy"*
+
+
+---
+# Min Hwangbo
 
 --
 
@@ -96,15 +174,7 @@ library(xaringanthemer)
 
 --
 
-* Pianist -> Data Collector -> Soccer Coach -> Instructor -> Preschool Teacher -> College Admin -> Tank Driver -> Policy Analyst -> Project Lead -> [R1 Postdoc Research Scientist] -> [R1 Research Associate Professor] -> ?
-
---
-
-* Responsible for:
-
-    * Summary of the program of study 
-    * Summary of Research interests 
-    * Summary of examination timeline
+* Pianist -> Data Collector -> Soccer Coach -> Instructor -> Preschool Teacher -> College Admin -> Tank Driver -> Policy Analyst -> Project Lead ->  ?
 
 ---
 # Timeline
@@ -115,28 +185,25 @@ library(xaringanthemer)
 
 --
 
-* Y2: Coaching, Mixed Methods, CSDE Cognates, Population Study
+* Y2: Coaching, Mixed Methods, Adult Learning, Population Study
 
 --
 
-* Y3: Advanced Methods, Adult Learning, Culture 
+* Y3 - Y4: Advanced Methods, Culture, & Dissertation
 
 --
 
-* Y4: Dissertation
-
---
-
-* Y1-4: Independent Studies (4) - Curricular Practical Training Requirement
+* Y1-4: Independent Studies
   * CA Coach Interviews
-  * Social Emotional Learning & Implementation Fidelity
+  * Implementation Fidelity
   * Trauma-Informed Care
-  * Longitudinal Study
-  * Survey Development and Analysis (Qualtrics)
+  * Survey Development and Analysis
+  * Data Integration and Visualization
+  * Academic & Targeted/Technical Reporting
 
 --
 
-* Gaps: Concentration?
+* Things to consider: Concentration? Deep dive into specialized quantitative methods? Peer-reviewed publications?
 
 --
 
