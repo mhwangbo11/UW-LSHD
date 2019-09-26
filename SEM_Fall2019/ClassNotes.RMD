@@ -18,5 +18,35 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Week 1: Intro/Overview of SEM (Sept. 25, 2019)
-##
+# Intro/Overview of SEM (Sept. 25, 2019)
+
+## Intro
+* Name
+* Program
+* OS
+* Previous stat experience
+* Something that I enjoyed/surprising thing over the Summer
+* Favoriate social media platform
+
+## Syllabus
+* Using R for analysis/rendering, SPSS for data cleaning/wrangling
+* Path -> EFA/CFA -> SRM/SEM -> Advanced i.e. Multi-level modeling
+* HW1: Path
+* HW2: EFA/CFA
+* HW3: SRM/SEM
+* Project proposal & presentation
+* `Lavaan`
+* Pen & Pencil | Laptop only for analysis/data coding
+* If needed, Mplus: About $900 for latent(aka *Non-observable*) variable analysis/SEM 
+* Book: Get the 4th edition: has a website w/`R` codes
+
+## Methods: Data sample size
+* EFA/CFA: Needs at least 6+ variables
+* Longitudinal data set: At least 3 time points/checks
+
+## Overview of SEM
+* Definition of **Structural equation modeling (SEM)**
+> 
+
+
+
