@@ -45,7 +45,7 @@ September 25, 2019
 * EFA/CFA: Needs at least 6+ variables
 * Longitudinal data set: At least 3 time points/checks
 
-## Overview of SEM
+## Definition of SEM
 * Definition of **Structural equation modeling (SEM)**
 
 > "A Way of representing phenomena using mathematical linear equation of random variables" 
@@ -53,4 +53,11 @@ September 25, 2019
 * i.e. [Money] -> (???) -> [Sexy garden]
 * ???: Since you have high income, you can afford to hire a gardner, which then will affect the beauty of your garden. This whole process is consider Path modeling.
 
+## Snapshots
+
+### SEM/Path
+![](Week1P1.jpg)
+
+### SEM Examples
+![](Week1P2.jpg)
 
