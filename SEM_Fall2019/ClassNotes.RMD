@@ -46,7 +46,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Overview of SEM
 * Definition of **Structural equation modeling (SEM)**
-> 
 
+> "A Way of representing phenomena using mathematical linear equation of random variables" 
+> i.e. [Money] -> (???) -> [Sexy garden]
+
+> * ???: Since you have high income, you can afford to hire a gardner, which then will affect the beauty of your garden.
 
 
