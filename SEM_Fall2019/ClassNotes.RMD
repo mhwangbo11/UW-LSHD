@@ -27,7 +27,7 @@ September 25, 2019
 * OS
 * Previous stat experience
 * Something that I enjoyed/surprising thing over the Summer
-* Favoriate social media platform
+* Favorite social media platform
 
 ## Syllabus
 * Using R for analysis/rendering, SPSS for data cleaning/wrangling
@@ -61,3 +61,7 @@ September 25, 2019
 ### SEM Examples
 ![](SEM_Fall2019/ClassNotesPics/Week1P2.jpg)
 
+## Next Steps
+* Read chapter 1-5
+* Install `Lavaan` package
+* Install `SPSS`
