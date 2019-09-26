@@ -1,0 +1,44 @@
+---
+title: "SEM Exercise"
+author: "Min Hwangbo"
+date:  "`r format(Sys.Date())`"
+output: 
+  html_document:
+    theme: paper
+    highlight: pygments
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    collapsed: true
+    smooth_scroll: true
+    number_sections: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Package & Sample data set
+```{r, message = FALSE}
+library(lavaan)
+data("HolzingerSwineford1939") 
+# Using the data set suggested by the author of the package: Yves Rosseel (Ghent Univ. from Belgium)
+## Tutorial can be found on: http://lavaan.ugent.be/tutorial/tutorial.pdf
+```
+
+# Lavaan
+```{r}
+## Specify the model ##
+HS.model <- ' visual =~ x1 + x2 + x3
+              textual =~ x4 + x5 + x6
+              speed =~ x7 + x8 + x9 '
+
+# X1, X2, X3 = Visual factor measured by 3 vars
+## X4, X5, X6 = Textual factor measured by 3 vars
+### X7, X8, X9 = Speed factor measured by 3 vars 
+
+## fit the model ##
+fit <- cfa(HS.model, data=HolzingerSwineford1939)
+
+## Display the summary output of the model ##
+summary(fit, fit.measures=TRUE)
+```
