@@ -42,3 +42,6 @@ fit <- cfa(HS.model, data=HolzingerSwineford1939)
 ## Display the summary output of the model ##
 summary(fit, fit.measures=TRUE)
 ```
+
+# Takeaway
+* Whatever the result shows strong/better fitting model, this doesn't mean that model is necessarily perfect or applicable for what I'm trying to analyze/measure. The decision has to be based on the theoretical frameworks that is considered as an evidence-based in the field that I'm interested in learning more about. i.e. for CQI building in Early Learning system, think about what are the true factors causing the "stronger" relationships between a coach and a "coachee". Is it really aobut a frequency of coaching visits, type of coaching visits, or highly competent coach/coachee relationship? Or is it about perhaps a coach can have a visit once, but the quality of the visit was holisitic enough to address performance, outcome, and process goals that are defined by International Coach Federation article (Beyond Smart Goals, 2019)?
