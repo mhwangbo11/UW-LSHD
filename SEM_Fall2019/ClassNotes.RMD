@@ -56,8 +56,8 @@ September 25, 2019
 ## Snapshots
 
 ### SEM/Path
-![](Week1P1.jpg)
+![](SEM_Fall2019/ClassNotesPics/Week1P1.jpg)
 
 ### SEM Examples
-![](Week1P2.jpg)
+![](SEM_Fall2019/ClassNotesPics/Week1P2.jpg)
 
