@@ -18,7 +18,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+I'm trying to figure out how to creat a Path model based on the example available on Kline's example (Kline, Figure 7.5, Table 4.2)
+
 I'm trying to figure out how to creat a Path model based on the example available on Kline's example (Kline, Figure 7.5, Table 4.2, p. 159)
+
 # Path Steps in R ##
 ```{r}
 # Step 1: Load libraries
@@ -63,25 +66,48 @@ rothFull.cor
 
 # Step 5: Add the standard devations & convert to covariances 
 ```{r}
+rothFull.cov <- cor2cov(rothFull.cor, sds = c(66.50, 38.00, 18.40, 33.50, 62.48)) # Adding SD & Cov conversation
 ```
 
 # Step 6: Display the covariances
 ```{r}
+rothFull.cov
 ```
 
 # Step 7: Specification of a model
 ```{r}
+# In regression format
+roth.model <- '
+fitness ~ exercise
+stress ~ hardy
+illness ~ fitness + stress'
+
+# Unanalyzed (correlation) association btw exercise & hardy
+# Automatically specified
 ```
+
 
 # Step 8: Fitting the initial model to data
 ```{r}
+# Variances and covariance of measured exogenous
+# Variables are free parameters
+# Variances calculaed with N - 1 in the denominator instead of N
+
+model <- sem(roth.model, #calling out a model
+             sample.cov=rothFull.cov, #data
+             sample.nobs = 373, fixed.x = FALSE, sample.cov.rescale = FALSE) # resize, fitting, etc
 ```
 
 # Step 9: Summarize it
 ```{r}
+summary(model, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)
 ```
 
 # Step 10: Interpret if it's fitting. If not, back to your modeling
 ```{r}
+fitted(model)
+residuals(model, type = "raw")
+residuals(model, type = "standardized")
+residuals(model, type = "cor")
+modindices(model) # Careful: Chi-Squared testing: Type I error high risk group
 ```
-
