@@ -11,13 +11,14 @@ output:
     toc_float: true
     collapsed: true
     smooth_scroll: true
-    number_sections: true
+    number_sections: false
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+I'm trying to figure out how to creat a Path model based on the example available on Kline's example (Kline, Figure 7.5, Table 4.2, p. 159)
 # Path Steps in R ##
 ```{r}
 # Step 1: Load libraries
@@ -27,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Step 5: Add the standard devations & convert to covariances 
 # Step 6: Display the covariances
 # Step 7: Specification of a model
-# Step 8: Fitting the initial model to dta
+# Step 8: Fitting the initial model to data
 # Step 9: Summarize it
 # Step 10: Interpret if it's fitting. If not, back to your modeling
 ```
@@ -40,7 +41,7 @@ library(lavaan) # loading lavaan package
 
 # Step 2: Input the correlations in lower diagonal form
 ```{r}
-roth.Lower.cor <- ' 
+rothLower.cor <- ' 
 1.00
 -.03  1.00  
  .39   .07  1.00
@@ -51,10 +52,36 @@ roth.Lower.cor <- '
 ```
 
 # Step 3: Name the varibles and convert to full correlation marix
+```{r}
+rothFull.cor <- getCov(rothLower.cor, names = c("exercise","hardy","fitness","stress","illness"))
+```
+
 # Step 4: Display the correlations
+```{r}
+rothFull.cor
+```
+
 # Step 5: Add the standard devations & convert to covariances 
+```{r}
+```
+
 # Step 6: Display the covariances
+```{r}
+```
+
 # Step 7: Specification of a model
-# Step 8: Fitting the initial model to dta
+```{r}
+```
+
+# Step 8: Fitting the initial model to data
+```{r}
+```
+
 # Step 9: Summarize it
+```{r}
+```
+
 # Step 10: Interpret if it's fitting. If not, back to your modeling
+```{r}
+```
+
