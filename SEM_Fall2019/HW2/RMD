@@ -1,0 +1,96 @@
+---
+title: "HW2_SEM_112719"
+author: "Min Hwangbo"
+date: "11/23/2019"
+output: 
+  html_document:
+    theme: paper
+    highlight: pygments
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    collapsed: true
+    smooth_scroll: true
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# HW 2: EFA/CFA 
+## Pakgages
+In this homework, make sure you are loading the following packages:
+```{r, comment = F, warning = F, message = F}
+library(GPArotation)  # GPA Factor rotation
+library(foreign)      # Data retrieving package
+library(psych)        # Procedures for psychometrics
+library(lavaan)       # lavaan package for SEM
+library(semPlot)      # sem diagram package
+```
+
+## Loading data set
+```{r}
+lavaan::cor2cov
+HW2data = read.delim(file.choose(), header = T)
+head(HW2data, 5)      # Matching first five obs
+tail(HW2data, 5)      # Matching last five obs
+View(HW2data)         # 79 obs; 7 vars
+```
+
+## EFA: Redo: Data has to be transformed to have the correlation table first before you do this
+
+```{r}
+## Full ML estimation and a promax rotation ##
+mod.efa = fa(r = HW2data, 2, rotate = "Promax", fm = "ml")
+
+## EFA output
+mod.efa
+
+## EFA diagram
+fa.diagram(mod.efa)
+```
+
+## CFA
+```{r}
+## Cor table ##
+modLower.cor <- '
+1.00
+-.07 1.00				
+ .14  .26  1.00
+-.05	.43   .42  1.00
+-.09  .14  	.17	  .39  1.00		
+ .12 -.14	  .13  -.21  -.19  1.00'
+
+## Name vars on cor table (input cor table via SPSS) ##
+modFull.cor <- getCov(modLower.cor, names = c("ppvt", "rln", "yopp", "wid", "wat", "spell"))
+
+## Cor table output ##
+modFull.cor
+
+## Cov table (input SD vis SPSS) ##
+modFull.cov <- lavaan::cor2cov(modFull.cor, sds = c(20.31, 13.31, 5.86, 3.41, 1.1, 7.94))
+
+## Cov table output ##
+modFull.cov
+
+## Specify model ##
+mod.model <- '
+  VERBAL =~ wid + rln + wat
+  WORD   =~ yopp '
+
+## Specify model ##
+model <- sem(mod.model, 
+             sample.cov = modFull.cov, 
+             sample.nobs = 21)
+
+## Model output ##
+summary(model, fit.measures = T, standardized = T, rsquare = T)
+
+## Model fitting ##
+fitted(model)
+
+## Path diagram ##
+semPaths(model, "model", "std", nCharNodes = 0, edge.color = "black", edge.label.cex = 1, layout = "tree2", lable.cex = 1, asize = 4, rotation = 2, sizeMan = 10, title =T)
+title("HW2 CFA", line=2) # Add title
+```
