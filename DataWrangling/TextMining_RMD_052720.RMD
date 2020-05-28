@@ -1,0 +1,245 @@
+---
+title: "TextMining_RMD_052720"
+author: "Min Hwangbo"
+date: "5/27/2020"
+output:
+  html_document:
+    preserve_yaml: true
+    toc: true
+    toc_float: true
+    keep_md: true
+    theme: spacelab
+published: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Preface
+
+Please review the following resources used for this document:
+
+* **Slide Deck: Exploratory Text Analysis in R** from `Nicholas Pröllochs`'s [website](https://nproellochs.com/)
+* [RMD Cheatsheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+* [Table of Contents on RMD](https://bookdown.org/yihui/rmarkdown/html-document.html)
+* [Data visualization via `ggplot` package](https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+
+# Load Libraries
+
+**Make sure you install `packages` first on your `console`!**
+
+```{r, warning = F, message = F, error = F, results = "hide"}
+library(tidyverse)   # Reading data
+library(tidytext)    # Text mining package
+library(gutenbergr)  # Free database from Project Gutenberg
+library(textclean)   # Handling contractions
+library(wordcloud)   # Data visualization to create wordcloud
+```
+
+# Tokenization
+
+What is **Tokenization**?
+
+* Organizing text data around tokens
+
+* If the data contains whole documents as a variable and the tokens are words, the data isn’t *tidy*
+
+```{r}
+## Code structure 101 ##
+## YourDataFrame <- Code that would bind your input to "YourDataFrame"
+
+## Example from Pröllochs (n.d.,p.11) ##
+txt <- c("These are words", "so are these", "this is running on")
+document <- c(1,2,3)
+dat <- tibble(txt, document)
+unnest_tokens(tbl = dat, output = "theme", input = txt)
+```
+
+**Code Structure**
+
+* `tbl`: dataframe
+* `output`: name of the column you want to generate
+* `input`: column in the dataframe that gets split
+
+# **Project Gutenberg** Example
+We're going to use this free ebook database to... 
+
+1) Download a full text
+2) Explore what's in there (text)
+3) How to use and clean this data in a `tidy` way.
+ 
+## Step 1: Gather Metadata
+```{r}
+gutenberg_metadata %>%
+  filter(author == "Shakespeare, William")
+```
+
+## Step 2: Download book 5314 *Household Tales by Brothers Grimm*
+```{r}
+full_text <- gutenberg_download(5314)
+```
+
+## Step 3: Take a glance of the full text via `slice(rows)`
+```{r}
+full_text %>% slice(1000:1005)
+```
+
+## Step 4: Let's tidy our text a.k.a.`Tokenization`
+```{r}
+tidy_book <- full_text %>%
+  unnest_tokens(word, text)
+tidy_book
+```
+
+## Step 5: Data exploration a.k.a. Can you figure out... 
+
+### Step 5a: What's the most `common` words?
+```{r}
+tidy_book %>% 
+  count(word, sort = T)
+```
+
+### Step 5b: Figure out `stopwords`?
+`Stopwords` are considered meaningless words including...
+
+* the
+* is
+* at
+* which
+* and... etc
+
+So our steps would be 1) Let's figure out stopwords and 2) Filter those out.
+```{r}
+## Figuring out `Stopwords` ##
+get_stopwords()
+
+## Filter Stopwords via `anti_join()` ##
+tidy_book %>%
+  anti_join(get_stopwords()) %>%
+  count(word, sort = TRUE)
+```
+
+### Step 5c: Handling `Contractions`
+
+And we also want to handle `Contractions` (Word + Word) such as...
+
+* Can't
+* We're
+* I'll... etc
+
+```{r}
+## Example ##
+text <- "I'll go home"
+replace_contraction(text, contraction.key = lexicon::key_contractions)
+head(lexicon::key_contractions, 5)
+
+## Ok back to the full text ##
+tidy_book <- full_text %>%
+  mutate(text = replace_contraction(text)) %>%
+  unnest_tokens(word, text)
+  tidy_book %>% filter(word == "can't") # And be patient this would take a while as it will try to filter everything from full text.
+```
+
+## Step 6: Data visualization!
+
+### Step 6a: Wordcloud
+
+```{r}
+wc_data <- tidy_book %>%
+  anti_join(stop_words) %>%
+  count(word)
+wordcloud(wc_data$word, wc_data$n, max.words = 100)
+```
+
+### Step 6b: Zipf’s law
+"Zipf’s law states that the frequency that a word appears is inversely proportional to its rank" (Pröllochs, n.d., p.24).
+
+```{r}
+term_freq <- tidy_book %>%
+  count(word, sort = TRUE) %>%
+  mutate(TotalWords = sum(n),
+         rank = row_number(),
+         tf = n / TotalWords)
+
+# Let's see the result!
+term_freq
+```
+
+Then if you visualize this data...
+```{r}
+term_freq %>%
+  ggplot(aes(rank, tf)) +
+  geom_line(size = 1.1, show.legend = FALSE) +
+  scale_x_log10() +
+  scale_y_log10()
+```
+
+# **Analysis Text Corpora** Example (Advanced)
+
+"A text corpus is a **structured set of texts** (e. g. a collection of articles) (Pröllochs, n.d., p.26).
+
+## Step 1: Load data - Physics classics
+```{r}
+gutenberg_metadata %>% filter(gutenberg_id %in% c(37729, 14725, 13476, 7333))
+
+## Let's download this as a dataframe called `physics` ##
+physics <- gutenberg_download(c(37729,14725,13476,7333), meta_fields = "author")
+```
+
+## Step 2: Data Exploration - Frequent words
+```{r}
+physics_words <- physics %>%
+  unnest_tokens(word, text) %>%
+  count(author, word, sort = TRUE) %>% print()
+
+# Then what if we're interested in what is the common word from each of these authors?
+```
+
+## Step 3: Understanding `Tf-idf` weighting concept
+
+* Best known weighting scheme in **information retrieval**
+* Increases with the number of **occurrences** of a term in a **document**
+* Increases with the **rarity** of the term in the **collection**
+
+> How to calculate `TF-idf`?
+
+1) Term Frequency (*tf*): Number of times a term *t* occurs in a document *d*
+2) Document Frequency (*df*): Number of documents *d* that contain each term *t*
+3) Inverse Document Frequency: *`idf = log(N/df)`* where *N* is the total number of documents
+4) Term frequency-inverse document frequency: *tf - idf = tf X idf*
+
+## Step 4: Applying `Tf-idf` weighting
+`bind_tf_idf(tbl, term, document, n)` adds tf-idf values to a tidy text dataset
+
+**Code Structure**
+
+* `tbl` is a tidy text dataset with one-row-per-term-per-document
+* `term` is the column containing the terms (`word` in this case)
+* `document` is the column containing the document IDs (`author` in this case)
+* `n` is the column containing document-term counts (`n` in this case)
+
+```{r}
+physics_words %>%
+  bind_tf_idf(word, author, n) %>%
+  arrange(desc(tf_idf))
+```
+
+## Step 5: Visualizing the results: Top 5 characteristics words per author (`ggplot` package)
+```{r}
+plot_physics <- physics_words %>%
+  bind_tf_idf(word, author, n) %>%
+  group_by(author) %>%
+  top_n(5, tf_idf) %>%
+  ungroup()
+
+ggplot(plot_physics, aes(reorder(word, tf_idf), tf_idf, fill = author)) + 
+  geom_col(show.legend = FALSE) + labs(x = NULL, y = "tf-idf") +
+  facet_wrap( ~ author, ncol = 4, scales = "free") + coord_flip() + theme_classic()
+```
+
+# Next Steps
+
+Can we replicate above processes to figure out...
+
+> From July 2019 till now, can we visualize top 5 topics that our educators requested from Circle Time Magazine Qualtrics data sets by June 15, 2020?
