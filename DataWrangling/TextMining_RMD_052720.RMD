@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Preface
 
-Please review the following resources used for this document:
+Please review the following resources used in this document:
 
 * **Slide Deck: Exploratory Text Analysis in R** from `Nicholas Pröllochs`'s [website](https://nproellochs.com/)
 * [RMD Cheatsheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
