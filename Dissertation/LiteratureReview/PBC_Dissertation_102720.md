@@ -24,7 +24,7 @@ published: false
   * Self-coaching with expert self-monitoring support (Bishop, Snyder, & Crow, 2015). 
 
 
-# ERIC/EBSCO search
+# R1: ERIC/EBSCO search
 * Search conducted on October 27, 2020
 * Search term: "Practice-based Coaching"
 * Results shown: 8 results (2014-2018): 8 articles (1 duplicate) -> 7 results
@@ -58,3 +58,22 @@ published: false
 
 ## Mason et al. (2017).
 * http://offcampus.lib.washington.edu/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=eric&AN=EJ1141313&site=ehost-live
+
+# R2: Education Source Search
+
+* Search conducted on October 29, 2020
+* Search term: "Practice-based Coaching"
+* Results shown: 8 results (2014-2020): 29 results (4 Duplicates from previous search) -> 25 articles
+* Running total: 32 results
+
+
+# R3: APA PsychInfo
+
+* Search conducted on October 29, 2020
+* Search term: "Practice-based Coaching"
+* Results shown: 11 results (2014-2021): 11 results (5 Duplicates from previous search) -> 6 articles
+* Running total: 38 results
+
+
+
+
