@@ -71,8 +71,8 @@ published: false
 
 * Search conducted on October 29, 2020
 * Search term: "Practice-based Coaching"
-* Results shown: 11 results (2014-2021): 11 results (5 Duplicates from previous search) -> 6 articles
-* Running total: 38 results
+* Results shown: 11 results (2014-2021): 11 results (6 Duplicates from previous search) -> 5 articles
+* Running total: 37 results
 
 
 
