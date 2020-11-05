@@ -81,5 +81,10 @@ knitr::opts_chunk$set(echo = TRUE)
 # References
 * Retrieve from Zotero
 
+# Discussions
+* Thoughts on conducting a trend analysis based on different categories of coaches' activites including practice-based coaching activities
+* Yet it's hard to determine what's the ratio due to inability to project how many coaches are coaching how many sites with the number of clients within certain region or geographical area.
+* Also there are anecdotes and stories from coaches from regions.
+
 
 
