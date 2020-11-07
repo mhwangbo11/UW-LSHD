@@ -77,6 +77,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * Running total: 37 results
 
 # R4: Expert recommended references
+Add KAM reference here.
 
 # References
 * Retrieve from Zotero
