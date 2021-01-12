@@ -1,0 +1,15 @@
+Youngwon
+
+Linear regression
+PCA: Latent variables predict 
+
+Linear Discriminant Analysis
+KCC theory
+Tree model
+
+
+Gotta do 
+LASSO regression
+RIDGE regression
+
+https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b
