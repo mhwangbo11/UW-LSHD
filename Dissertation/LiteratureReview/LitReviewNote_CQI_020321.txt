@@ -1,0 +1,31 @@
+Madill et al., 2020
+
+RQ: Are indicators of child care quality associated with higher child care prices, as reported by centerbased providers? 
+
+Goal: "...there is limited information about how the quality of care is related to the prices charged for child care."
+
+Data: data from the 2012 National Survey of Early Care and Education (NSECE), an integrated
+set of nationally representative surveys of ECE providers and households with young children.
+
+Sample: 
+Level 1 - 3194 ECE providers with at least one child under 60 months of age with reports of unsubsidized program.
+Level 2 - 2780 classrooms
+Level 3 - 1380 teachers
+
+Summary for me:
+
+"Many other quality indicators, however, did not have significant associations with prices. For example,
+ECE centers that help children and their families get services—either on-site or by referral (e.g.,
+health screening, developmental assessments, therapeutic services, counseling services, and/or social
+services)— do not systematically report higher prices for care than centers that do not offer such
+services. And although teachers who report attending workshops in the past year tended to work in
+ECE centers that report higher prices, receipt of coaching, mentoring, or ongoing consultation was
+unrelated to the reported price in centers" (p.18).
+
+Reflection: There seems to be some indications that if a center provided mentors/coaches/consultants for teachers and instructional staff, some associations were found on center-level indicators of quality 
+- Infant: b = 0.28; SE = 0.34 
+- Toddler: b = .10; SE = .23
+- Preschool: b = .31; SE = 0.24
+
+But I thought if this would be the case y ~ ax | a = beta makes let's say one dosage of coaching (or a program provides coaching), decreases the price of a pre-K program by .31 unit means if the original price of the program was $1, it will be down to .69?
+And I am also wondering about how authors have not tried HLM as it seems there's a natural design of the sample that are specified into three different samples?
