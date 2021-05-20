@@ -1,0 +1,63 @@
+Check-in:
+- In thought of Cricket
+- Urgency of projects
+
+Updates
+
+Show & Tell from Johnna on Setting up Sharedpoint Server
+- Sharedpoint Research Sharepoint
+	- STEAM (Solution)
+	- PBS (SQL PowerApp)
+- SQL / Linux Server
+	- SQL server
+	- PBS dataserver
+
+Coverpage/FrontMatter from Janet
+- Suggestion to move forward with Front Matter info/description of the project overview
+- Intentional collaboration w/Data Manager (w/Johnna) and
+- Brings value to documentation/scalability! (esp. during the beginning of the project)
+
+Sharepoint
+- Catalog: Past projects
+- Overview page of the project and leverage/advance the field
+- Also CERE as a hub for RA for mentorship structure
+- Student also has their own environment
+
+Cons
+- Navigation piece/Organizational/Directory of sites
+	- this should be defined portal and make # of links/sites as minimum as possible.
+- There is a way to address "accessibility"
+- Anybody can create a Sharedpoint Site
+
+The portal can be integrated into:
+- Sharepoint
+- Teams
+- Link it on Google Intranet page as well
+
+Checklist -> Webpage on Native Sharepoint Site
++ Create a chronological phases and have it embed it on the subsite
+	- Plan
+		- Computer order form
+	- Setup
+	- Manage
+	- Closeout
+
++ Create a wiki on i.e. What is C-dash?
+	- Contents per page
+
+Next steps 
+- Research/Evaluation tool: Need to use Teams
+- Phase of research definition on the docu
+- Tag phase of different research activities and
+- Create information for other areas
+
+
+Q&A
+- Ticketing system and order form
+	- Approval flow for ticketing system for IT hardwares/softwares
+
+
+
+
+
+
