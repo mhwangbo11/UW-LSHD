@@ -1,4 +1,4 @@
-## Welcome to this GitHub Page
+## Welcome to my repo!
 
 My name is Min Hwangbo, PhD in Learning Sciences & Human Development I created this website while I was learning `Rstudio` during my Learning Sciences/Human Development program years (2017 - 2021).
 
